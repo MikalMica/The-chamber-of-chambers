@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 4983014312426749400}
   - component: {fileID: 7947685724029627089}
   - component: {fileID: 6028492488833395370}
+  - component: {fileID: 7848374463635447363}
   m_Layer: 0
   m_Name: Resource
   m_TagString: Untagged
@@ -194,3 +195,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7848374463635447363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526536420578346591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3124a3fbab50b4fb2271573c1a4fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _resourceContainer: {fileID: 11400000, guid: e0f40f9c53567f04d96ca7853e7a08cb, type: 2}
+  _onGetDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6028492488833395370}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GetHit
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onGetResource:
+    m_PersistentCalls:
+      m_Calls: []

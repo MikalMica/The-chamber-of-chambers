@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 1867641486235509732}
   - component: {fileID: 2911817428807484383}
   - component: {fileID: 7379014362028498908}
+  - component: {fileID: -7092482509697442660}
   m_Layer: 0
   m_Name: Chamber
   m_TagString: Untagged
@@ -194,3 +195,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7092482509697442660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042686932682828707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9669984a652e8841bc050cd53dd3c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
+  _damage: 10
+  _attackFrequency: 1
+  _attackRange: 1
