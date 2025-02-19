@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ChamberHandler : MonoBehaviour
 {
-    ChamberBrain _selectedChamber;
-
+    Queue<ChamberBrain> _selectedChambers = new Queue<ChamberBrain>();
     private void Update() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -12,18 +12,30 @@ public class ChamberHandler : MonoBehaviour
         {
             if(hit.collider.TryGetComponent(out ChamberBrain chamberBrain)) {
                 if(Input.GetMouseButtonDown(0)) {
-                    _selectedChamber = chamberBrain;
+                    if(!Input.GetKey(KeyCode.LeftShift)){
+                        int nChambers = _selectedChambers.Count;
+                        for(int i = 0; i < nChambers; ++i) _selectedChambers.Dequeue();
+                    }
+                    _selectedChambers.Enqueue(chamberBrain);
                 }
             }else if(hit.collider.TryGetComponent(out HealthHandler healthHandler)) {
                 if(Input.GetMouseButtonDown(0)) {
-                    if(_selectedChamber != null) {
-                        _selectedChamber.SetTarget(healthHandler);
+                    int nChambers = _selectedChambers.Count;
+                    for(int i = 0; i < nChambers; ++i){
+                        ChamberBrain a_chamber = _selectedChambers.Dequeue();
+                        if(a_chamber != null) {
+                            a_chamber.SetTarget(healthHandler);
+                        }
                     }
                 }
             }else if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor")) {
                 if(Input.GetMouseButtonDown(0)) {
-                    if(_selectedChamber != null) {
-                        _selectedChamber.GotoPosition(hit.point);
+                    int nChambers = _selectedChambers.Count;
+                    for(int i = 0; i < nChambers; ++i){
+                        ChamberBrain a_chamber = _selectedChambers.Dequeue();
+                        if(a_chamber != null) {
+                            a_chamber.GotoPosition(hit.point);
+                        }
                     }
                 }
             }
