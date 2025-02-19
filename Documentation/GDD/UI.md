@@ -1,0 +1,1 @@
+La **UI** es, por el momento, meramente **informativa** y no contiene nada más que los [[recursos]] que tiene el jugador acompañado de la **cantidad** de cada uno.
