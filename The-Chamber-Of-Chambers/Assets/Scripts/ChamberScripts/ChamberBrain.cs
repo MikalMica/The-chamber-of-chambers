@@ -44,7 +44,7 @@ public class ChamberBrain : MonoBehaviour
 
     IEnumerator AttackTarget() {
 
-        while(_target.isActiveAndEnabled) {
+        while(_target != null && _target.isActiveAndEnabled) {
             _animator.Play("Attack");
             _target.GetDamage(_damage);
             yield return new WaitForSeconds(_attackFrequency);
