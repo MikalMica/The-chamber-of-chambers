@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 1093882167}
   - component: {fileID: 1093882166}
   - component: {fileID: 1093882165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +628,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _jumpForce: 5
 --- !u!1001 &1140086968293936157
 PrefabInstance:
   m_ObjectHideFlags: 0

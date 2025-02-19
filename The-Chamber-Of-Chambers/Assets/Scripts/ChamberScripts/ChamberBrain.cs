@@ -12,39 +12,34 @@ public class ChamberBrain : MonoBehaviour
     [SerializeField] float _attackRange = 0.1f;
 
     Rigidbody _rigidbody;
-    UnityAction _currentAction;
 
     private void Awake() {
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-
-        _currentAction = Follow;
     }
 
-    private void Update() {
-        if(_target != null) Run();
-        else _animator.SetBool("isMoving", false);
-    }
-
-    void Run() {
-        _currentAction.Invoke();
-    }
-
-    void Follow()
+    IEnumerator Follow()
     {
         _animator.SetBool("isMoving", true);
 
-        Vector3 direction = (_target.transform.position - transform.position).normalized;
-        _rigidbody.linearVelocity = new Vector3(direction.x * _speed, _rigidbody.linearVelocity.y, direction.z * _speed);
-
-        if(direction.x < 0) transform.localScale = new Vector3(1, 1, 1);
-        else if(direction.x > 0) transform.localScale = new Vector3(-1, 1, 1);
-
-        if(Vector3.Distance(transform.position, _target.transform.position) <= _attackRange) {
-            _rigidbody.linearVelocity = Vector3.zero;
-            StartCoroutine(AttackTarget());
-            _currentAction = ()=>{};
+        while(Vector3.Distance(transform.position, _target.transform.position) > _attackRange)
+        {
+            Vector3 direction = (_target.transform.position - transform.position).normalized;
+            Goto(direction);
+            yield return new WaitForEndOfFrame();
         }
+
+        _rigidbody.linearVelocity = Vector3.zero;
+        _animator.SetBool("isMoving", false);
+
+        StartCoroutine(AttackTarget());
+    }
+    
+    public void SetTarget(Resource target)
+    {
+        _target = target;
+        StopAllCoroutines();
+        StartCoroutine(Follow());
     }
 
     IEnumerator AttackTarget() {
@@ -54,9 +49,35 @@ public class ChamberBrain : MonoBehaviour
             _target.GetDamage(_damage);
             yield return new WaitForSeconds(_attackFrequency);
         }
-
-        _currentAction = Follow;
     }
 
-    public void SetTarget(Resource target) => _target = target;
+    public void GotoPosition(Vector3 targetPos)
+    {
+        StopAllCoroutines();
+        StartCoroutine(GotoPositionRoutine(targetPos));
+    }
+
+    IEnumerator GotoPositionRoutine(Vector3 targetPos)
+    {
+        _animator.SetBool("isMoving", true);
+        
+        while(Vector3.Distance(transform.position, targetPos) > 0.1f)
+        {
+            Vector3 direction = (targetPos - transform.position).normalized;
+            Goto(direction);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        _rigidbody.linearVelocity = Vector3.zero;
+        _animator.SetBool("isMoving", false);
+    }
+
+    void Goto(Vector3 direction)
+    {
+        _rigidbody.linearVelocity = new Vector3(direction.x * _speed, _rigidbody.linearVelocity.y, direction.z * _speed);
+
+        if(direction.x < 0) transform.localScale = new Vector3(1, 1, 1);
+        else if(direction.x > 0) transform.localScale = new Vector3(-1, 1, 1);
+    }
 }
