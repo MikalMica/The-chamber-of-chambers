@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 534323325311499061}
   - component: {fileID: 8900885929387889771}
+  - component: {fileID: 8796014474973090146}
   m_Layer: 7
   m_Name: sr
   m_TagString: Untagged
@@ -87,6 +88,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8796014474973090146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2298110791903362510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75cb7d8a88c680746baa28ebacd74ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4042686932682828707
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +225,36 @@ MonoBehaviour:
   _damage: 10
   _attackFrequency: 1
   _attackRange: 1
+  _onSelect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8796014474973090146}
+        m_TargetAssemblyTypeName: SetMaterial, Assembly-CSharp
+        m_MethodName: SetSpriteMaterial
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: 7e1ed0606aab7a54590ff16c1192eb29, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onDeselect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8796014474973090146}
+        m_TargetAssemblyTypeName: SetMaterial, Assembly-CSharp
+        m_MethodName: SetSpriteMaterial
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: e2e23f14def19564b87427e059f4d25e, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4659014203869566026
 MonoBehaviour:
   m_ObjectHideFlags: 0

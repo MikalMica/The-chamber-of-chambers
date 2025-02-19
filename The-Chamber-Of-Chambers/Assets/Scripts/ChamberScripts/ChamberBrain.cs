@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ChamberBrain : MonoBehaviour
+public class ChamberBrain : MonoBehaviour, ISelectable
 {
     Animator _animator;
     HealthHandler _target;
@@ -10,6 +10,12 @@ public class ChamberBrain : MonoBehaviour
     [SerializeField] int _damage = 10;
     [SerializeField] float _attackFrequency = 1f;
     [SerializeField] float _attackRange = 0.1f;
+
+    [SerializeField] UnityEvent _onSelect;
+    [SerializeField] UnityEvent _onDeselect;
+
+    public void Select() => _onSelect.Invoke();
+    public void Deselect() => _onDeselect.Invoke();
 
     Rigidbody _rigidbody;
 

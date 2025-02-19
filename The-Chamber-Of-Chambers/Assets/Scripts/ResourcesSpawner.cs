@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourcesSpawner : MonoBehaviour
@@ -8,6 +9,9 @@ public class ResourcesSpawner : MonoBehaviour
 
     [SerializeField] int _amount = 2;
     [SerializeField] float _spawnRate = 3;
+    [SerializeField] int _maxResources = 10;
+
+    List<GameObject> _spawnedResources = new List<GameObject>();
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
@@ -18,9 +22,12 @@ public class ResourcesSpawner : MonoBehaviour
 
     IEnumerator SpawnResourcesRoutine() {
         while(true) {
+
             for(int i = 0; i < _amount; i++) {
-                SpawnResources();
+                if(_spawnedResources.Count < _maxResources) SpawnResources();
+                else break;
             }
+
             yield return new WaitForSeconds(_spawnRate);
         }
     }
@@ -31,6 +38,8 @@ public class ResourcesSpawner : MonoBehaviour
             Random.Range(transform.position.y - _size.y / 2, transform.position.y + _size.y / 2),
             Random.Range(transform.position.z - _size.z / 2, transform.position.z + _size.z / 2)
         );
-        Instantiate(_resources[Random.Range(0, _resources.Length)], position, Quaternion.identity);
+        InstanceHandler obj = Instantiate(_resources[Random.Range(0, _resources.Length)], position, Quaternion.identity).GetComponent<InstanceHandler>();
+        obj.AddDestroyListener(() => _spawnedResources.Remove(obj.gameObject));
+        _spawnedResources.Add(obj.gameObject);
     }
 }

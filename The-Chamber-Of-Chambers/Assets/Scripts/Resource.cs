@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Resouce : MonoBehaviour
+public class Resource : MonoBehaviour
 {
     [SerializeField] int _health = 100;
     [SerializeField] Int _resourceContainer;

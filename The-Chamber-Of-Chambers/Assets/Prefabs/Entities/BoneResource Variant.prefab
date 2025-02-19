@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4577150533003094534, guid: cae19ee9011560f49a8dbe95afec499d, type: 3}
+      propertyPath: _health
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5493585387252866161, guid: cae19ee9011560f49a8dbe95afec499d, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7848374463635447363, guid: cae19ee9011560f49a8dbe95afec499d, type: 3}
       propertyPath: _health
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7848374463635447363, guid: cae19ee9011560f49a8dbe95afec499d, type: 3}
       propertyPath: _resourceContainer
