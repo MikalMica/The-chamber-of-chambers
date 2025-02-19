@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 7947685724029627089}
   - component: {fileID: 6028492488833395370}
   - component: {fileID: 7848374463635447363}
+  - component: {fileID: 4577150533003094534}
   m_Layer: 0
   m_Name: Resource
   m_TagString: Untagged
@@ -225,5 +226,36 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _onGetResource:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4577150533003094534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526536420578346591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d1b79afa4ad5545a85271aa3e380eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _onGetDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7848374463635447363}
+        m_TargetAssemblyTypeName: Resouce, Assembly-CSharp
+        m_MethodName: GetDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onDie:
     m_PersistentCalls:
       m_Calls: []

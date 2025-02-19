@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class ChamberBrain : MonoBehaviour
 {
     Animator _animator;
-    Resource _target;
+    HealthHandler _target;
     [SerializeField] float _speed = 5f;
     [SerializeField] int _damage = 10;
     [SerializeField] float _attackFrequency = 1f;
@@ -35,7 +35,7 @@ public class ChamberBrain : MonoBehaviour
         StartCoroutine(AttackTarget());
     }
     
-    public void SetTarget(Resource target)
+    public void SetTarget(HealthHandler target)
     {
         _target = target;
         StopAllCoroutines();
@@ -44,7 +44,7 @@ public class ChamberBrain : MonoBehaviour
 
     IEnumerator AttackTarget() {
 
-        while(_target != null) {
+        while(_target.isActiveAndEnabled) {
             _animator.Play("Attack");
             _target.GetDamage(_damage);
             yield return new WaitForSeconds(_attackFrequency);
@@ -60,7 +60,7 @@ public class ChamberBrain : MonoBehaviour
     IEnumerator GotoPositionRoutine(Vector3 targetPos)
     {
         _animator.SetBool("isMoving", true);
-        
+
         while(Vector3.Distance(transform.position, targetPos) > 0.1f)
         {
             Vector3 direction = (targetPos - transform.position).normalized;

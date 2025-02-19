@@ -14,17 +14,13 @@ public class ChamberHandler : MonoBehaviour
                 if(Input.GetMouseButtonDown(0)) {
                     _selectedChamber = chamberBrain;
                 }
-            }
-
-            if(hit.collider.TryGetComponent(out Resource resource)) {
+            }else if(hit.collider.TryGetComponent(out HealthHandler healthHandler)) {
                 if(Input.GetMouseButtonDown(0)) {
                     if(_selectedChamber != null) {
-                        _selectedChamber.SetTarget(resource);
+                        _selectedChamber.SetTarget(healthHandler);
                     }
                 }
-            }
-
-            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor")) {
+            }else if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor")) {
                 if(Input.GetMouseButtonDown(0)) {
                     if(_selectedChamber != null) {
                         _selectedChamber.GotoPosition(hit.point);
@@ -32,6 +28,6 @@ public class ChamberHandler : MonoBehaviour
                 }
             }
         }
-        
+
     }
 }
