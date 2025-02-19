@@ -11,31 +11,31 @@ public class ChamberHandler : MonoBehaviour
         if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) 
         {
             if(hit.collider.TryGetComponent(out ChamberBrain chamberBrain)) {
-                if(Input.GetMouseButtonDown(0) && (Input.GetKey(KeyCode.LeftShift) || _selectedChambers.Count < 1)) {
+                if(Input.GetMouseButtonDown(0)) {
+                    if(!Input.GetKey(KeyCode.LeftShift)){
+                        int nChambers = _selectedChambers.Count;
+                        for(int i = 0; i < nChambers; ++i) _selectedChambers.Dequeue();
+                    }
                     _selectedChambers.Enqueue(chamberBrain);
                 }
             }else if(hit.collider.TryGetComponent(out HealthHandler healthHandler)) {
                 if(Input.GetMouseButtonDown(0)) {
-<<<<<<< HEAD
-                    if(_selectedChamber != null) {
-                        _selectedChamber.SetTarget(healthHandler);
+                    int nChambers = _selectedChambers.Count;
+                    for(int i = 0; i < nChambers; ++i){
+                        ChamberBrain a_chamber = _selectedChambers.Dequeue();
+                        if(a_chamber != null) {
+                            a_chamber.SetTarget(healthHandler);
+                        }
                     }
                 }
             }else if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor")) {
                 if(Input.GetMouseButtonDown(0)) {
-                    if(_selectedChamber != null) {
-                        _selectedChamber.GotoPosition(hit.point);
-=======
-                    
-                    int a_nChambers = _selectedChambers.Count; 
-                    ChamberBrain a_chamber;
-
-                    for(int i = 0; i < a_nChambers; ++i){
-                        a_chamber = _selectedChambers.Dequeue();
-                        if(a_chamber != null){
-                            a_chamber.SetTarget(resource);
+                    int nChambers = _selectedChambers.Count;
+                    for(int i = 0; i < nChambers; ++i){
+                        ChamberBrain a_chamber = _selectedChambers.Dequeue();
+                        if(a_chamber != null) {
+                            a_chamber.GotoPosition(hit.point);
                         }
->>>>>>> ff64e01 (Se pegan varios)
                     }
                 }
             }
