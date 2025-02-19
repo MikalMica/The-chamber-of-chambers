@@ -1,24 +1,30 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Resource : MonoBehaviour
 {
-    [SerializeField] int _health = 100;
+    HealthHandler _healthHandler;
     [SerializeField] Int _resourceContainer;
     
     [SerializeField] UnityEvent _onGetDamage;
     [SerializeField] UnityEvent _onGetResource;
 
+    private void Awake() {
+        _healthHandler = GetComponent<HealthHandler>();
+        _healthHandler.SuscribeToGetDamage(GetDamage);
+        _healthHandler.SuscribeToDie(()=>{Destroy(gameObject);});
+    }
+
+    private void OnDestroy() {
+        _healthHandler.UnsuscribeToGetDamage(GetDamage);
+        _healthHandler.UnsuscribeToDie(()=>{Destroy(gameObject);});
+    }
+
     public void GetDamage(int damage)
     {
-        _health -= damage;
-        _resourceContainer.AddValue(damage);
+        int realValue = Math.Clamp(damage, 0, _healthHandler.Health);
+        _resourceContainer.AddValue(realValue);
         _onGetDamage.Invoke();
-
-        if(_health <= 0)
-        {
-            _onGetResource.Invoke();
-            Destroy(gameObject);
-        }
     }
 }
